@@ -5,19 +5,20 @@ intents:
   - despedir
   - afirmar
   - negar
-  - informar_generico
+  - informar_generico # Pode ser útil para respostas livres
   - informar_tipo_exame
   - informar_motivo_exame
   - informar_nome
   - informar_periodo
+  - solicitar_agendamento # Nova intenção para iniciar o formulário
 
 entities:
   - nome_paciente
   - tipo_exame
   - motivo_exame
-  - sim_ou_nao
   - periodo
-  - generico
+  # 'sim_ou_nao' e 'generico' podem não ser necessários se usarmos intents affirm/deny
+  # e mapeamentos from_text/from_entity para os outros
 
 slots:
   nome_paciente:
@@ -26,92 +27,102 @@ slots:
     mappings:
     - type: from_entity
       entity: nome_paciente
-      intent: informar_nome
+      intent: [informar_nome, informar_generico] # Permitir preencher com nome direto
   tipo_exame:
-    type: text
-    influence_conversation: true
+    type: text # Manter como text por enquanto, validação na Action
+    influence_conversation: true # Essencial para a lógica condicional
     mappings:
     - type: from_entity
       entity: tipo_exame
-      intent: informar_tipo_exame
+      intent: [informar_tipo_exame, informar_generico]
   motivo_exame:
     type: text
     influence_conversation: false
     mappings:
-    - type: from_entity
-      entity: motivo_exame
-      intent: informar_motivo_exame
+    # Usar from_text pega qualquer texto após a pergunta
+    - type: from_text
+      intent: [informar_motivo_exame, informar_generico]
   tempo_sintomas:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
       entity: periodo
-      intent: informar_periodo
+      intent: [informar_periodo, informar_generico]
+    - type: from_text # Pega texto livre se entidade não for extraída
+      intent: [informar_periodo, informar_generico]
   historico_de_trauma:
-    type: bool 
+    type: bool
     influence_conversation: false
     mappings:
     - type: from_intent
-      intent: affirm
+      intent: afirmar # Usar 'afirmar' do seu novo domain
       value: true
     - type: from_intent
-      intent: deny
+      intent: negar # Usar 'negar' do seu novo domain
       value: false
-  historico_de_cirurgia:
-    type: bool 
+  historico_de_cirurgia: # Corrigido nome do slot (cirurgia)
+    type: bool
     influence_conversation: false
     mappings:
     - type: from_intent
-      intent: affirm
+      intent: afirmar
       value: true
     - type: from_intent
-      intent: deny
+      intent: negar
       value: false
-  
-  
 
 responses:
   utter_cumprimentar_inicial:
-  - text: "Olá, sou a assistente virtual do grupo SRA, e vou te auxiliar no preenhcimento do formulário de anamnese"
+  - text: "Olá, sou a assistente virtual do grupo SRA, e vou te auxiliar no preenhcimento do formulário de anamnese."
 
-  utter_ask_nome:
-  - text: "Qual o seu nome?"
+  # Renomear utter_ask_nome para corresponder ao slot nome_paciente
+  utter_ask_nome_paciente:
+  - text: "Qual o nome completo do paciente?"
 
   utter_ask_tipo_exame:
   - text: "Entendido. Qual exame você gostaria de agendar? (Ex: 'Tomografia Computadorizada do Tórax' ou 'Ressonância Magnética Neuro')"
+    # Botões são recomendados aqui para padronizar a entrada
+    buttons:
+      - title: "Tomografia Computadorizada do Tórax"
+        payload: '/informar_tipo_exame{"tipo_exame": "tomografia computadorizada do torax"}'
+      - title: "Ressonância Magnética Neuro"
+        payload: '/informar_tipo_exame{"tipo_exame": "ressonancia magnetica neuro"}'
 
   utter_ask_motivo_exame:
-  - text: "Qual o motivo do exame?"
+  - text: "Qual o motivo principal para a realização deste exame?"
 
   utter_ask_tempo_sintomas:
-  - text: "Quanto tempo está com esses sintomas?"
+  - text: "Há quanto tempo você apresenta esses sintomas?"
 
   utter_ask_historico_de_trauma:
-  - text: "Você tem histórico de trauma na região?"
+  - text: "Houve algum trauma (pancada, acidente) recente ou antigo na região do tórax? (sim/não)"
 
-  utter_ask_historico_de_cirurgia:
-  - text: "Você tem histórico de cirurgia na região?"
+  utter_ask_historico_de_cirurgia: # Corrigido nome da response
+  - text: "O paciente já realizou alguma cirurgia na cabeça ou pescoço? (sim/não)"
 
   utter_despedida:
   - text: "Obrigado por utilizar o nosso assistente virtual. Tenha um ótimo dia!"
 
-forms:
-  anamnese_tc_torax:
-    required_slots:
-        - nome
-        - tipo_exame
-        - motivo_exame
-        - tempo_sintomas
-        - historico_de_trauma
-  anamnese_rm_neuro:
-    required_slots:
-        - nome
-        - tipo_exame
-        - motivo_exame
-        - tempo_sintomas
-        - historico_de_cirugia
+  utter_submit:
+    - text: "Obrigado! Recebi as informações necessárias."
+  
+  utter_ask_continue: # Opcional
+    - text: "Posso ajudar com mais alguma coisa?"
 
+actions:
+  # Ação que valida e gerencia a lógica do formulário
+  - validate_anamnese_form # Nome da action atualizado
+
+forms:
+  # Usaremos UMA forma, gerenciada pela Action
+  anamnese_form:
+    required_slots:
+        # A action 'validate_anamnese_form' definirá dinamicamente
+        # os slots necessários a partir daqui.
+        - nome_paciente
+        # - tipo_exame # Será adicionado dinamicamente
+        # - ... outros slots conforme a lógica na action
 
 session_config:
   session_expiration_time: 60

@@ -3,82 +3,84 @@ version: "3.1"
 nlu:
 - intent: cumprimentar
   examples: |
-    - Oi
-    - Olá
-    - Bom dia
-    - Boa tarde
-    - Boa noite
-    - E aí
-    - Tudo bem?
-    - Como você está?
-    - Como vai?
-    - Como você está hoje?
-    - Olá, tudo bem?
-    - Olá, como você está?
-    - Olá, como vai?
-    - Olá, tudo certo?
-    - Olá, tudo tranquilo?
+    - oi
+    - olá
+    - bom dia
+    - boa tarde
+    - e aí
 
 - intent: despedir
   examples: |
-    - Tchau
-    - Até logo
-    - Até mais
-    - Até breve
-    - Adeus
-    - Falou
-    - Valeu
-    - Até a próxima
-    - Até mais tarde
-    - Até amanhã
-    - Até logo mais
-    - Tchauzinho
+    - tchau
+    - até logo
+    - adeus
+    - obrigado, só isso
 
 - intent: afirmar
   examples: |
-    - Sim
-    - Claro
+    - sim
+    - s
+    - positivo
+    - claro
+    - com certeza
+    - isso mesmo
+    - correto
+    - afirmativo
 
 - intent: negar
   examples: |
-    - Não
-    - N
+    - não
+    - n
+    - negativo
+    - de jeito nenhum
+    - nada disso
+    - incorreto
+
+- intent: solicitar_agendamento # Nova intenção
+  examples: |
+    - quero marcar um exame
+    - preciso preencher o formulário
+    - agendar um exame
+    - como faço para agendar?
+    - iniciar preenchimento
+    - quero fazer um exame
 
 - intent: informar_nome
   examples: |
-    - Meu nome é [João](nome)
-    - Eu sou [Maria](nome)
-    - Me chamo [Carlos](nome)
-    - Meu nome é [Ana](nome)
-    - Eu sou [Lucas](nome)
-    - Me chamo [Fernanda](nome)
-    - Meu nome é [Pedro](nome)
-    - Eu sou [Juliana](nome)
-    - Me chamo [Roberto](nome)
-    - Meu nome é [Patrícia](nome)
-    - [José](nome)
-    - [Roger](nome)
+    - meu nome é [João da Silva](nome_paciente)
+    - o paciente se chama [Maria Oliveira](nome_paciente)
+    - [Carlos Souza](nome_paciente)
 
 - intent: informar_tipo_exame
   examples: |
-    - Eu vou fazer um [exame de sangue](tipo_exame)
-    - Estou realizando um [exame de urina](tipo_exame)
-    - Preciso fazer um [exame de fezes](tipo_exame)
-    - Vou fazer um [exame de imagem](tipo_exame)
-    - Estou realizando um [exame de sangue](tipo_exame)
-    - Preciso fazer um [exame de urina](tipo_exame)
-    - Vou fazer um [exame de sangue](tipo_exame)
-    - Estou realizando um [exame de urina](tipo_exame)
-    - Vou fazer um [tc_torax](tipo_exame)
-
+    - quero fazer [tomografia computadorizada do torax](tipo_exame)
+    - o exame é [ressonancia magnetica neuro](tipo_exame)
+    - [tomografia torax](tipo_exame:tomografia computadorizada do torax)
+    - [ressonancia da cabeça](tipo_exame:ressonancia magnetica neuro)
+    - é [tomografia](tipo_exame:tomografia computadorizada do torax)
+    - será [RM Neuro](tipo_exame:ressonancia magnetica neuro)
 
 - intent: informar_motivo_exame
   examples: |
-    - O motivo do exame é [verificação de saúde](motivo_exame)
-    - Estou fazendo o exame por [sintomas de gripe](motivo_exame)
-    - O exame é para [check-up anual](motivo_exame)
-    - Estou fazendo o exame por [suspeita de diabetes](motivo_exame)
-    - O motivo do exame é [verificação de colesterol](motivo_exame)
-    - Estou fazendo o exame por [sintomas de dor de cabeça](motivo_exame)
-    - O exame é para [verificação de pressão alta](motivo_exame)
-    - Estou com [dores no peito](motivo_exame)
+    - o motivo é [dor no peito](motivo_exame)
+    - sinto [falta de ar](motivo_exame)
+    - por causa de [dor de cabeça forte](motivo_exame)
+    - [suspeita de nódulo](motivo_exame)
+    - [check-up](motivo_exame) médico pediu
+
+- intent: informar_periodo
+  examples: |
+    - faz [duas semanas](periodo)
+    - começou [ontem](periodo)
+    - estou assim há [mais de um mês](periodo)
+    - [alguns dias](periodo)
+    - [desde janeiro](periodo)
+    - [10 dias](periodo)
+
+- intent: informar_generico # Para capturar texto livre nos slots from_text
+  examples: |
+    - dor forte na cabeça
+    - uns 5 dias mais ou menos
+    - foi só uma batida leve
+    - fiz cirurgia há 10 anos
+    # Adicionar mais exemplos de respostas gerais que podem preencher slots

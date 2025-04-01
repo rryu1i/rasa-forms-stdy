@@ -1,0 +1,44 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-motivo_exame",
+      "2": "I-motivo_exame",
+      "3": "L-motivo_exame",
+      "4": "U-motivo_exame",
+      "5": "B-nome_paciente",
+      "6": "I-nome_paciente",
+      "7": "L-nome_paciente",
+      "8": "U-nome_paciente",
+      "9": "B-periodo",
+      "10": "I-periodo",
+      "11": "L-periodo",
+      "12": "U-periodo",
+      "13": "B-tipo_exame",
+      "14": "I-tipo_exame",
+      "15": "L-tipo_exame",
+      "16": "U-tipo_exame",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-motivo_exame": 1,
+      "I-motivo_exame": 2,
+      "L-motivo_exame": 3,
+      "U-motivo_exame": 4,
+      "B-nome_paciente": 5,
+      "I-nome_paciente": 6,
+      "L-nome_paciente": 7,
+      "U-nome_paciente": 8,
+      "B-periodo": 9,
+      "I-periodo": 10,
+      "L-periodo": 11,
+      "U-periodo": 12,
+      "B-tipo_exame": 13,
+      "I-tipo_exame": 14,
+      "L-tipo_exame": 15,
+      "U-tipo_exame": 16,
+      "O": 0
+    },
+    "num_tags": 17
+  }
+]

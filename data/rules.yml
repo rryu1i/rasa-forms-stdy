@@ -1,22 +1,31 @@
 version: "3.1"
 
 rules:
-
-- rule: Iniciar atendimento - Perguntar nome do paciente
+- rule: Cumprimentar e iniciar formulário (se solicitado)
   steps:
   - intent: cumprimentar
   - action: utter_cumprimentar_inicial
-  - action: utter_ask_nome
-- rule: Perguntar tipo de exame
+  # Poderia ter uma regra separada para iniciar com solicitar_agendamento
+
+- rule: Ativar formulário de anamnese
   steps:
-  - intent: informar_nome
-  - action: utter_ask_tipo_exame
-- rule: Ativar formulario
+  - intent: solicitar_agendamento # Gatilho para o formulário
+  - action: anamnese_form      # Ativa o formulário ÚNICO
+  - active_loop: anamnese_form # Mantém o formulário ativo
+
+# Regra para submeter o formulário (quando a action não pedir mais slots)
+- rule: Submeter formulário anamnese
+  condition:
+  - active_loop: anamnese_form # Formulário que está ativo
   steps:
-  - intent: informar_tipo_exame
-  - action: anamnese_tc_torax
-  - active_loop: anamnese_tc_torax
-- rule: Finalizar atendimento
+  - action: anamnese_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_submit # Resposta de sucesso
+  - action: utter_ask_continue # Opcional: perguntar se quer mais algo
+
+- rule: Responder a despedida
   steps:
-  - intent: informar_generico
-  - action: utter_depedida
+  - intent: despedir
+  - action: utter_despedida
