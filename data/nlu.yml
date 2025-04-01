@@ -1,0 +1,84 @@
+version: "3.1"
+
+nlu:
+- intent: cumprimentar
+  examples: |
+    - Oi
+    - Olá
+    - Bom dia
+    - Boa tarde
+    - Boa noite
+    - E aí
+    - Tudo bem?
+    - Como você está?
+    - Como vai?
+    - Como você está hoje?
+    - Olá, tudo bem?
+    - Olá, como você está?
+    - Olá, como vai?
+    - Olá, tudo certo?
+    - Olá, tudo tranquilo?
+
+- intent: despedir
+  examples: |
+    - Tchau
+    - Até logo
+    - Até mais
+    - Até breve
+    - Adeus
+    - Falou
+    - Valeu
+    - Até a próxima
+    - Até mais tarde
+    - Até amanhã
+    - Até logo mais
+    - Tchauzinho
+
+- intent: afirmar
+  examples: |
+    - Sim
+    - Claro
+
+- intent: negar
+  examples: |
+    - Não
+    - N
+
+- intent: informar_nome
+  examples: |
+    - Meu nome é [João](nome)
+    - Eu sou [Maria](nome)
+    - Me chamo [Carlos](nome)
+    - Meu nome é [Ana](nome)
+    - Eu sou [Lucas](nome)
+    - Me chamo [Fernanda](nome)
+    - Meu nome é [Pedro](nome)
+    - Eu sou [Juliana](nome)
+    - Me chamo [Roberto](nome)
+    - Meu nome é [Patrícia](nome)
+    - [José](nome)
+    - [Roger](nome)
+
+- intent: informar_tipo_exame
+  examples: |
+    - Eu vou fazer um [exame de sangue](tipo_exame)
+    - Estou realizando um [exame de urina](tipo_exame)
+    - Preciso fazer um [exame de fezes](tipo_exame)
+    - Vou fazer um [exame de imagem](tipo_exame)
+    - Estou realizando um [exame de sangue](tipo_exame)
+    - Preciso fazer um [exame de urina](tipo_exame)
+    - Vou fazer um [exame de sangue](tipo_exame)
+    - Estou realizando um [exame de urina](tipo_exame)
+    - Vou fazer um [tc_torax](tipo_exame)
+
+
+- intent: informar_motivo_exame
+  examples: |
+    - O motivo do exame é [verificação de saúde](motivo_exame)
+    - Estou fazendo o exame por [sintomas de gripe](motivo_exame)
+    - O exame é para [check-up anual](motivo_exame)
+    - Estou fazendo o exame por [suspeita de diabetes](motivo_exame)
+    - O motivo do exame é [verificação de colesterol](motivo_exame)
+    - Estou fazendo o exame por [sintomas de dor de cabeça](motivo_exame)
+    - O exame é para [verificação de pressão alta](motivo_exame)
+    - Estou com [dores no peito](motivo_exame)

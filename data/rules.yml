@@ -1,0 +1,22 @@
+version: "3.1"
+
+rules:
+
+- rule: Iniciar atendimento - Perguntar nome do paciente
+  steps:
+  - intent: cumprimentar
+  - action: utter_cumprimentar_inicial
+  - action: utter_ask_nome
+- rule: Perguntar tipo de exame
+  steps:
+  - intent: informar_nome
+  - action: utter_ask_tipo_exame
+- rule: Ativar formulario
+  steps:
+  - intent: informar_tipo_exame
+  - action: anamnese_tc_torax
+  - active_loop: anamnese_tc_torax
+- rule: Finalizar atendimento
+  steps:
+  - intent: informar_generico
+  - action: utter_depedida

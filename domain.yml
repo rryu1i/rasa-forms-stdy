@@ -1,0 +1,118 @@
+version: "3.1"
+
+intents:
+  - cumprimentar
+  - despedir
+  - afirmar
+  - negar
+  - informar_generico
+  - informar_tipo_exame
+  - informar_motivo_exame
+  - informar_nome
+  - informar_periodo
+
+entities:
+  - nome_paciente
+  - tipo_exame
+  - motivo_exame
+  - sim_ou_nao
+  - periodo
+  - generico
+
+slots:
+  nome_paciente:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: nome_paciente
+      intent: informar_nome
+  tipo_exame:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: tipo_exame
+      intent: informar_tipo_exame
+  motivo_exame:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: motivo_exame
+      intent: informar_motivo_exame
+  tempo_sintomas:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: periodo
+      intent: informar_periodo
+  historico_de_trauma:
+    type: bool 
+    influence_conversation: false
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+    - type: from_intent
+      intent: deny
+      value: false
+  historico_de_cirurgia:
+    type: bool 
+    influence_conversation: false
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+    - type: from_intent
+      intent: deny
+      value: false
+  
+  
+
+responses:
+  utter_cumprimentar_inicial:
+  - text: "Olá, sou a assistente virtual do grupo SRA, e vou te auxiliar no preenhcimento do formulário de anamnese"
+
+  utter_ask_nome:
+  - text: "Qual o seu nome?"
+
+  utter_ask_tipo_exame:
+  - text: "Entendido. Qual exame você gostaria de agendar? (Ex: 'Tomografia Computadorizada do Tórax' ou 'Ressonância Magnética Neuro')"
+
+  utter_ask_motivo_exame:
+  - text: "Qual o motivo do exame?"
+
+  utter_ask_tempo_sintomas:
+  - text: "Quanto tempo está com esses sintomas?"
+
+  utter_ask_historico_de_trauma:
+  - text: "Você tem histórico de trauma na região?"
+
+  utter_ask_historico_de_cirurgia:
+  - text: "Você tem histórico de cirurgia na região?"
+
+  utter_despedida:
+  - text: "Obrigado por utilizar o nosso assistente virtual. Tenha um ótimo dia!"
+
+forms:
+  anamnese_tc_torax:
+    required_slots:
+        - nome
+        - tipo_exame
+        - motivo_exame
+        - tempo_sintomas
+        - historico_de_trauma
+  anamnese_rm_neuro:
+    required_slots:
+        - nome
+        - tipo_exame
+        - motivo_exame
+        - tempo_sintomas
+        - historico_de_cirugia
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

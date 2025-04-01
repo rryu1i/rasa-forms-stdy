@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-motivo_exame",
+      "2": "I-motivo_exame",
+      "3": "L-motivo_exame",
+      "4": "U-motivo_exame",
+      "5": "B-nome",
+      "6": "I-nome",
+      "7": "L-nome",
+      "8": "U-nome",
+      "9": "B-tipo_exame",
+      "10": "I-tipo_exame",
+      "11": "L-tipo_exame",
+      "12": "U-tipo_exame",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-motivo_exame": 1,
+      "I-motivo_exame": 2,
+      "L-motivo_exame": 3,
+      "U-motivo_exame": 4,
+      "B-nome": 5,
+      "I-nome": 6,
+      "L-nome": 7,
+      "U-nome": 8,
+      "B-tipo_exame": 9,
+      "I-tipo_exame": 10,
+      "L-tipo_exame": 11,
+      "U-tipo_exame": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]
