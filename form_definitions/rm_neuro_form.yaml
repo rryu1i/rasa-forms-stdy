@@ -1,0 +1,67 @@
+form_name: rm_neuro_form
+fields:
+  - slot: nome_paciente
+    ask_utter: utter_ask_nome_paciente
+    type: text
+  - slot: motivo_exame
+    ask_utter: utter_ask_motivo_exame
+    type: text
+  - slot: rmn_teve_trauma
+    ask_utter: utter_ask_rmn_teve_trauma
+    type: bool
+  - slot: rmn_quando_trauma
+    ask_utter: utter_ask_rmn_quando_trauma
+    type: text
+    ask_if: {slot: rmn_teve_trauma, value: true}
+  - slot: rmn_tempo_sintomas
+    ask_utter: utter_ask_rmn_tempo_sintomas
+    type: text
+  - slot: rmn_fez_cirurgia
+    ask_utter: utter_ask_rmn_fez_cirurgia
+    type: bool
+  - slot: rmn_quando_cirurgia
+    ask_utter: utter_ask_rmn_quando_cirurgia
+    type: text
+    ask_if: {slot: rmn_fez_cirurgia, value: true}
+  - slot: rmn_motivo_cirurgia
+    ask_utter: utter_ask_rmn_motivo_cirurgia
+    type: text
+    ask_if: {slot: rmn_fez_cirurgia, value: true}
+  - slot: rmn_tem_problema_saude
+    ask_utter: utter_ask_rmn_tem_problema_saude
+    type: bool
+  - slot: rmn_qual_problema_saude
+    ask_utter: utter_ask_rmn_qual_problema_saude
+    type: text
+    ask_if: {slot: rmn_tem_problema_saude, value: true}
+  - slot: rmn_fez_quimioterapia
+    ask_utter: utter_ask_rmn_fez_quimioterapia
+    type: bool
+  - slot: rmn_quando_quimioterapia
+    ask_utter: utter_ask_rmn_quando_quimioterapia
+    type: text
+    ask_if: {slot: rmn_fez_quimioterapia, value: true}
+  - slot: rmn_fez_radioterapia
+    ask_utter: utter_ask_rmn_fez_radioterapia
+    type: bool
+  - slot: rmn_quando_radioterapia
+    ask_utter: utter_ask_rmn_quando_radioterapia
+    type: text
+    ask_if: {slot: rmn_fez_radioterapia, value: true}
+  - slot: rmn_tem_formigamento
+    ask_utter: utter_ask_rmn_tem_formigamento
+    type: bool
+  - slot: rmn_onde_formigamento
+    ask_utter: utter_ask_rmn_onde_formigamento
+    type: text
+    ask_if: {slot: rmn_tem_formigamento, value: true}
+  - slot: rmn_tem_exames_anteriores
+    ask_utter: utter_ask_rmn_tem_exames_anteriores
+    type: bool
+  - slot: rmn_quando_exames_anteriores
+    ask_utter: utter_ask_rmn_quando_exames_anteriores
+    type: text
+    ask_if: {slot: rmn_tem_exames_anteriores, value: true}
+  - slot: rmn_precisa_contraste
+    ask_utter: utter_ask_rmn_precisa_contraste
+    type: bool
